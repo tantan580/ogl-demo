@@ -124,6 +124,7 @@ int main()
 {
     initGlfw();
     createWindow();
+
     ShaderManager color_shader;
     color_shader.buildShader(color_vs,GL_VERTEX_SHADER);
     color_shader.buildShader(color_fs,GL_FRAGMENT_SHADER);
