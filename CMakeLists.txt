@@ -29,9 +29,10 @@ else(WIN32)
     pkg_check_modules(DEPS REQUIRED glfw3 gdk-pixbuf-2.0)
     include_directories(${DEPS_INCLUDE_DIRS})
 
-    file(GLOB project_file blur-effect/main.cpp blur-effect/blur_shader.h  ../glad/src/glad.c )
+    file(GLOB project_file advanced_ogl/framebuffers.cpp  ../glad/src/glad.c )
     #introduction/textures.cpp   lighting/color.cpp advanced_ogl/framebuffers.cpp
     add_executable(${PROJECT_NAME} ${project_file})
+    add_subdirectory(blur-effect)
     target_link_libraries(${PROJECT_NAME}
         ${DEPS_LIBRARIES}
         -lGL

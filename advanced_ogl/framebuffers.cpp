@@ -167,6 +167,7 @@ void setData()
     //load textures
     createTexture("./wall.jpg",cubeTexture);
     createTexture("./duck.jpg",floorTexture);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 int main()

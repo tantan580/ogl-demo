@@ -33,6 +33,8 @@ void createTexture(std::string filename,unsigned int &tex){
     n = gdk_pixbuf_get_n_channels(pixbuf);
     w = gdk_pixbuf_get_width(pixbuf);
     h = gdk_pixbuf_get_height(pixbuf);  
+    std::cout<<"texture width :"<<w<<std::endl;
+    std::cout<<"texture height :"<<h<<std::endl;
 #else
     stbi_set_flip_vertically_on_load(true); // tell stb_image.h to flip loaded texture's on the y-axis.
     data = stbi_load(filename.c_str(), &w, &h, &n, 0);   

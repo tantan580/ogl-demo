@@ -7,8 +7,8 @@
 
 GLFWwindow* gl_window = nullptr;
 // settings
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT = 600;
+const unsigned int SCR_WIDTH = 860;
+const unsigned int SCR_HEIGHT = 540;
 // camera
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 float lastX = SCR_WIDTH / 2.0f;
@@ -90,11 +90,11 @@ int createWindow()
     }
     glfwMakeContextCurrent(gl_window);
     glfwSetFramebufferSizeCallback(gl_window, framebuffer_size_callback);
-    glfwSetCursorPosCallback(gl_window, mouse_callback);
-    glfwSetScrollCallback(gl_window, scroll_callback);
+    //glfwSetCursorPosCallback(gl_window, mouse_callback);
+    //glfwSetScrollCallback(gl_window, scroll_callback);
 
     // tell GLFW to capture our mouse
-    glfwSetInputMode(gl_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    //glfwSetInputMode(gl_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     // glad: load all OpenGL function pointers
     // ---------------------------------------
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
