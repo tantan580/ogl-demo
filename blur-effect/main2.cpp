@@ -1,4 +1,4 @@
-#include "blur_shader.h"
+#include "blur_shader2.h"
 #include "shader.h"
 #include "texture.h"
 #include "camera.h"
@@ -131,14 +131,14 @@ int main()
 
     glUniform1i(glGetUniformLocation(linear_filter_pro,"image"),0);
     glUniform2f(glGetUniformLocation(linear_filter_pro, "resolution"),(GLfloat)resx, (GLfloat)resy);
-    glUniform1fv(glGetUniformLocation(linear_filter_pro, "weight"), weights.size(), &weights[0]);
-    glUniform1fv(glGetUniformLocation(linear_filter_pro, "offset"), offsets.size(), &offsets[0]);
+    //glUniform1fv(glGetUniformLocation(linear_filter_pro, "weight"), weights.size(), &weights[0]);
+    //glUniform1fv(glGetUniformLocation(linear_filter_pro, "offset"), offsets.size(), &offsets[0]);
     glUniform1i(glGetUniformLocation(linear_filter_pro,"filterMode"),0);//default is vertical filter
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    //glLineWidth(3.f);
+   // glLineWidth(3.f);
 
     while (!glfwWindowShouldClose(gl_window))
     {
@@ -170,10 +170,15 @@ int main()
         glUseProgram(linear_filter_pro);
         glUniform1i(glGetUniformLocation(linear_filter_pro,"filterMode"),1);//1 is horizontal filter
         glDrawArrays(GL_TRIANGLES, 0, 6);
+        //glow
         //3
         glBindFramebuffer(GL_FRAMEBUFFER, 0);//output-->screen
         glBindTexture(GL_TEXTURE_2D, fbotex2);//input-->fbotex2
         glUseProgram(pro);
+        glUniform1i(glGetUniformLocation(linear_filter_pro,"filterMode"),2);
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, tex0);//input-->tex0
+        glUniform1i(glGetUniformLocation(linear_filter_pro,"image2"),1);
         glDrawArrays(GL_TRIANGLES, 0, 6);
 #endif
         glfwSwapBuffers(gl_window);
