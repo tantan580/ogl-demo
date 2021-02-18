@@ -1,7 +1,7 @@
-#include "common.h"
-#include "shader.h"
-#include "texture.h"
-#include "camera.h"
+#include "common/common.h"
+#include "common/shader.h"
+#include "common/texture.h"
+#include "common/camera.h"
 
 const char *color_vs = R"(
                        #version 330 core

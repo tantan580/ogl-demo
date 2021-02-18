@@ -12,32 +12,38 @@ if(WIN32)
     include_directories("G:\\OpenGL\\demo\\3rdparty\\glad\\include\\")
     include_directories("G:\\OpenGL\\demo\\3rdparty\\stb-master\\")
     include_directories("G:\\OpenGL\\demo\\3rdparty\\glfw-master\\include\\")
-    include_directories("G:\\OpenGL\\demo\\3rdparty\\glm-master")                     
+    include_directories("G:\\OpenGL\\demo\\3rdparty\\glm-master")
     link_directories("G:\\OpenGL\\demo\\3rdparty\\glfw-master\\build\\src")
-    
+
     #link_directories($(PROJECT_SOURCE_DIR)/3rdpartyglfw-master/build/src)
-    
+
     file(GLOB project_file introduction/01_4.cpp common.h shader.h texture.h glad.c)
-    add_executable(${PROJECT_NAME} ${project_file})   
-    add_executable(blur blur-effect/) 
+    add_executable(${PROJECT_NAME} ${project_file})
+    add_executable(blur blur-effect/)
     target_link_libraries(${PROJECT_NAME} glfw3 opengl32)
 else(WIN32)
-    include_directories(../glad/include)
-    include_directories(./)
-    #find_package(glfw3 REQUIRED)
+    include_directories(${CMAKE_SOURCE_DIR}/thirdparty/glad/include)
+    include_directories(${CMAKE_SOURCE_DIR}/thirdparty/)
+    include_directories(${CMAKE_SOURCE_DIR})
     find_package(PkgConfig REQUIRED)
+    find_package (GLUT REQUIRED)
     pkg_check_modules(DEPS REQUIRED glfw3 gdk-pixbuf-2.0)
-    include_directories(${DEPS_INCLUDE_DIRS})
+    include_directories(${DEPS_INCLUDE_DIRS} ${GLUT_INCLUDE_DIR})
 
-    file(GLOB project_file lighting/color.cpp  ../glad/src/glad.c )
-    #introduction/textures.cpp   lighting/color.cpp advanced_ogl/framebuffers.cpp
-    add_executable(${PROJECT_NAME} ${project_file})
-    add_subdirectory(blur-effect)
-    target_link_libraries(${PROJECT_NAME}
+    set(thirdcpp ${CMAKE_SOURCE_DIR}/thirdparty/glad/src/glad.c)
+    set(oglLibs
         ${DEPS_LIBRARIES}
+        ${GLUT_glut_LIBRARY}
         -lGL
         #-lm
         -lpthread
         -ldl
-        )
+    )
+
+    message("CMAKE_SOURCE_DIR=${CMAKE_SOURCE_DIR}")
+    add_subdirectory(advanced_ogl)
+    add_subdirectory(introduction)
+    add_subdirectory(lighting)
+    add_subdirectory(blur-effect)
+    
 endif()

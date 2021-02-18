@@ -1,7 +1,7 @@
 #include "blur_shader.h"
-#include "shader.h"
-#include "texture.h"
-#include "camera.h"
+#include "common/shader.h"
+#include "common/texture.h"
+#include "common/camera.h"
 #include "gaussian.h"
 
 //最主要是kernel的生成，它决定着BLUR的效果如何
@@ -36,10 +36,11 @@ void setData()
 //    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(GLfloat),
 //            (const GLvoid*)(2*sizeof(GLfloat)));
     //create texture and fbo
-    createTexture("/data/home/tanfang/WorkSpace/src/OpenGL/buildqt/texture2.jpg",tex0);
+    createTexture("/home/tanfang/workspace/src/OpenGL/buildqt/texture2.jpg",tex0);
     //framebuffer configuration1
-    glGenFramebuffers(1, &fbo1);
-    glBindFramebuffer(GL_FRAMEBUFFER, fbo1);
+    //为了让所有的渲染操作对主窗口产生影响我们必须通过绑定为0来使默认帧缓冲被激活glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glGenFramebuffers(1, &fbo1);//创建帧缓冲
+    glBindFramebuffer(GL_FRAMEBUFFER, fbo1);//绑定fbo1帧缓冲对象这个上下文
     glGenTextures(1,&fbotex1);
     glBindTexture(GL_TEXTURE_2D, fbotex1);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, SCR_WIDTH, SCR_HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
@@ -147,17 +148,19 @@ int main()
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glViewport(0,0,SCR_WIDTH,SCR_HEIGHT);
-        // {
-        //     glBindFramebuffer(GL_FRAMEBUFFER, 0);
-        //     glActiveTexture(GL_TEXTURE0);
-        //     glBindTexture(GL_TEXTURE_2D, tex0);//input-->tex0
-        //     glBindVertexArray(cubeVAO);
-        //     glUseProgram(pro);
-        //     glDrawArrays(GL_TRIANGLES, 0, 6);
+//         {
+//             glBindFramebuffer(GL_FRAMEBUFFER, 0);
+//             glActiveTexture(GL_TEXTURE0);
+//             glBindTexture(GL_TEXTURE_2D, tex0);//input-->tex0
+//             glBindVertexArray(cubeVAO);
+//             glUseProgram(pro);
+//             glDrawArrays(GL_TRIANGLES, 0, 6);
 
-        // }
+//         }
 #if 1
-        glBindFramebuffer(GL_FRAMEBUFFER, fbo1);//output-->fbotex1
+        //glBindFramebuffer 表示绘制到fbotex1上
+        glBindFramebuffer(GL_FRAMEBUFFER, fbo1);//output-->fbotex1 ,表示fbo1这个帧缓冲被激活，
+        //后续所有渲染操作将渲染到当前绑定的帧缓冲的附加缓冲中
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, tex0);//input-->tex0
         glUseProgram(linear_filter_pro);

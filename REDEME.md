@@ -8,3 +8,6 @@ requirements:
 + libgles2-mesa-dev
 
 blur-effect base on [idea](http://rastergrid.com/blog/2010/09/efficient-gaussian-blur-with-linear-sampling/)
+
+
+

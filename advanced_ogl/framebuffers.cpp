@@ -1,7 +1,14 @@
-#include "common.h"
-#include "shader.h"
-#include "texture.h"
-#include "camera.h"
+#include "common/common.h"
+#include "common/shader.h"
+#include "common/texture.h"
+#include "common/camera.h"
+#include <unistd.h>
+
+struct {
+    const std::string walljpg = "wall.jpg";
+    const std::string duckjpg = "duck.jpg";
+} rs;
+
 const char *vs = R"(
                        #version 330 core
                        layout (location = 0) in vec3 aPos;
@@ -165,8 +172,8 @@ void setData()
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
 
     //load textures
-    createTexture("./wall.jpg",cubeTexture);
-    createTexture("./duck.jpg",floorTexture);
+    createTexture(rs.walljpg,cubeTexture);
+    createTexture(rs.duckjpg,floorTexture);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 

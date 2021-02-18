@@ -1,4 +1,4 @@
-#include "../common.h"
+#include "common/common.h"
 
 //shader
 const char *vs = R"(

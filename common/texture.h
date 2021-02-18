@@ -12,6 +12,7 @@
 #include <iostream>
 
 void createTexture(std::string filename,unsigned int &tex){
+    std::cout<<"map path:"<<filename<<std::endl;
     glGenTextures(1,&tex);
     glBindTexture(GL_TEXTURE_2D,tex);
     // set the texture wrapping parameters

@@ -1,7 +1,7 @@
 //texture test
-#include "common.h"
-#include "shader.h"
-#include "texture.h"
+#include "common/common.h"
+#include "common/shader.h"
+#include "common/texture.h"
 
 unsigned int VBO;
 unsigned int VAO;

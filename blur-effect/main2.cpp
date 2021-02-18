@@ -1,7 +1,7 @@
 #include "blur_shader2.h"
-#include "shader.h"
-#include "texture.h"
-#include "camera.h"
+#include "common/shader.h"
+#include "common/texture.h"
+#include "common/camera.h"
 #include "gaussian.h"
 
 //最主要是kernel的生成，它决定着BLUR的效果如何

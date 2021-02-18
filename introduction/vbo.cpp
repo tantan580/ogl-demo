@@ -5,16 +5,16 @@
 //https://www.cnblogs.com/mazhenyu/p/6547219.html
 
 //闭源驱动VBO单独就可以使用，并且有兼容模式，老版本OPENGL和新版本都可以一起使用
-#include "common.h"
-#include "shaderManager.h"
+#include "common/common.h"
+#include "common/shader.h"
 
-const char *vertexShaderSource = "#version 330 core\n"
+const char *vs = "#version 330 core\n"
     "layout (location = 0) in vec3 aPos;\n"
     "void main()\n"
     "{\n"
     "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
     "}\0";
-const char *fragmentShaderSource = "#version 330 core\n"
+const char *fs = "#version 330 core\n"
     "out vec4 FragColor;\n"
     "void main()\n"
     "{\n"
@@ -47,8 +47,8 @@ int main()
     initGlfw();
     createWindow();
 
-    ShaderManager::instance()->buildShader(vertexShaderSource,GL_VERTEX_SHADER);
-    ShaderManager::instance()->buildShader(fragmentShaderSource,GL_FRAGMENT_SHADER);
+    ShaderManager::instance()->buildShader(vs,GL_VERTEX_SHADER);
+    ShaderManager::instance()->buildShader(fs,GL_FRAGMENT_SHADER);
     // link shaders
     int shaderProgram = ShaderManager::instance()->link();
 
