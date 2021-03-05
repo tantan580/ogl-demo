@@ -2,11 +2,12 @@
 #include "common/shader.h"
 #include "common/texture.h"
 #include "common/camera.h"
+#include "common/filesystem.h"
 #include <unistd.h>
 
 struct {
-    const std::string walljpg = "wall.jpg";
-    const std::string duckjpg = "duck.jpg";
+    const std::string walljpg = "resources/wall.jpg";
+    const std::string duckjpg = "resources/duck.jpg";
 } rs;
 
 const char *vs = R"(
@@ -172,8 +173,10 @@ void setData()
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
 
     //load textures
-    createTexture(rs.walljpg,cubeTexture);
-    createTexture(rs.duckjpg,floorTexture);
+    std::cout<<FileSystem::getPath(rs.walljpg.c_str())<<std::endl;
+
+    createTexture(FileSystem::getPath(rs.walljpg.c_str()),cubeTexture);
+    createTexture(FileSystem::getPath(rs.duckjpg.c_str()),floorTexture);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 

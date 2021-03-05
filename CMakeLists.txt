@@ -39,7 +39,8 @@ else(WIN32)
         -lpthread
         -ldl
     )
-
+    configure_file(./common/root_directory.h.in configuration/root_directory.h)
+    include_directories(${CMAKE_BINARY_DIR}/configuration)
     message("CMAKE_SOURCE_DIR=${CMAKE_SOURCE_DIR}")
     add_subdirectory(advanced_ogl)
     add_subdirectory(introduction)
