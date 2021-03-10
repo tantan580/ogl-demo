@@ -1,7 +1,5 @@
-/****我们在现实生活中看到某一物体的颜色并不是这个物体的真实颜色，
- * 而是它所反射(Reflected)的颜色。换句话说，那些不能被物体吸收(Absorb)的颜色(被反射的颜色)
-     就是我们能够感知到的物体的颜色。例如,太阳光被认为是由许多不同的颜色组合成的白色光。
-     如果我们将白光照在一个蓝色的玩具上，这个蓝色的玩具会吸收白光中除了蓝色以外的所有颜色，不被吸收的蓝色光被反射到我们的眼中，使我们看到了一个蓝色的玩具
+/****环境光
+ * 如果你现在运行你的程序，你会注意到冯氏光照的第一个阶段已经应用到你的物体上了。这个物体非常暗，但不是完全的黑暗，
 ******/
 #include "common/common.h"
 #include "common/shader.h"
@@ -21,7 +19,8 @@ const char *color_vs = R"(
                            gl_Position = projection * view * model * vec4(aPos, 1.0);
                        }
                        )";
-
+//环境光照
+//把环境光照添加到场景里非常简单。我们用光的颜色乘以一个(数值)很小常量环境因子，再乘以物体的颜色，然后使用它作为片段的颜色
 const char * color_fs = R"(#version 330 core
                          out vec4 FragColor;
 
@@ -30,7 +29,10 @@ const char * color_fs = R"(#version 330 core
 
                          void main()
                          {
-                             FragColor = vec4(lightColor * objectColor, 1.0);
+                             float ambientStrength = 0.3f;
+                             vec3 ambient = ambientStrength * lightColor;
+                             vec3 result = ambient * objectColor;
+                             FragColor = vec4(result, 1.0);
                          }
 )";
 
@@ -129,15 +131,17 @@ int main()
 {
     initGlfw();
     createWindow();
-
+    // configure global opengl state
+    // -----------------------------
+    glEnable(GL_DEPTH_TEST);
     ShaderManager color_shader;
     color_shader.buildShader(color_vs,GL_VERTEX_SHADER);
     color_shader.buildShader(color_fs,GL_FRAGMENT_SHADER);
-    GLuint color_pro = color_shader.link();
+    color_shader.link();
     ShaderManager light_shader;
     light_shader.buildShader(light_vs,GL_VERTEX_SHADER);
     light_shader.buildShader(light_fs,GL_FRAGMENT_SHADER);
-    GLuint light_pro = light_shader.link();
+    light_shader.link();
 
     setData();
     //render loop
@@ -155,7 +159,7 @@ int main()
 
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glUseProgram(color_pro);
+        color_shader.use();
         color_shader.setVec3("objectColor", 1.0f, 0.5f, 0.31f);
         color_shader.setVec3("lightColor",  1.0f, 1.0f, 1.0f);
         // view/projection transformations
@@ -171,7 +175,7 @@ int main()
         glBindVertexArray(cubeVAO);
         glDrawArrays(GL_TRIANGLES, 0, 36);
         // also draw the lamp object
-        glUseProgram(light_pro);
+        light_shader.use();
         light_shader.setMat4("projection", projection);
         light_shader.setMat4("view", view);
         model = glm::mat4(1.0f);
