@@ -36,7 +36,7 @@ void setData()
 //    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(GLfloat),
 //            (const GLvoid*)(2*sizeof(GLfloat)));
     //create texture and fbo
-    createTexture("/data/home/tanfang/WorkSpace/src/OpenGL/buildqt/texture2.jpg",tex0);
+    createTexture("texture2.jpg",tex0);
     //framebuffer configuration1
     glGenFramebuffers(1, &fbo1);
     glBindFramebuffer(GL_FRAMEBUFFER, fbo1);
@@ -133,7 +133,7 @@ int main()
     glUniform2f(glGetUniformLocation(linear_filter_pro, "resolution"),(GLfloat)resx, (GLfloat)resy);
     //glUniform1fv(glGetUniformLocation(linear_filter_pro, "weight"), weights.size(), &weights[0]);
     //glUniform1fv(glGetUniformLocation(linear_filter_pro, "offset"), offsets.size(), &offsets[0]);
-    glUniform1i(glGetUniformLocation(linear_filter_pro,"filterMode"),0);//default is vertical filter
+
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
@@ -161,7 +161,7 @@ int main()
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, tex0);//input-->tex0
         glUseProgram(linear_filter_pro);
-
+        glUniform1i(glGetUniformLocation(linear_filter_pro,"filterMode"),0);//default is vertical filter
         glBindVertexArray(cubeVAO);
         glDrawArrays(GL_TRIANGLES, 0, 6);
         //2
@@ -170,15 +170,21 @@ int main()
         glUseProgram(linear_filter_pro);
         glUniform1i(glGetUniformLocation(linear_filter_pro,"filterMode"),1);//1 is horizontal filter
         glDrawArrays(GL_TRIANGLES, 0, 6);
-        //glow
-        //3
+
+        //3 output screen
         glBindFramebuffer(GL_FRAMEBUFFER, 0);//output-->screen
         glBindTexture(GL_TEXTURE_2D, fbotex2);//input-->fbotex2
         glUseProgram(pro);
-        glUniform1i(glGetUniformLocation(linear_filter_pro,"filterMode"),2);
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, tex0);//input-->tex0
-        glUniform1i(glGetUniformLocation(linear_filter_pro,"image2"),1);
+        glDrawArrays(GL_TRIANGLES, 0, 6);
+        //glow
+        //3
+//        glBindFramebuffer(GL_FRAMEBUFFER, 0);//output-->screen
+//        glBindTexture(GL_TEXTURE_2D, fbotex2);//input-->fbotex2
+//        glUseProgram(pro);
+//        glUniform1i(glGetUniformLocation(linear_filter_pro,"filterMode"),2);
+//        glActiveTexture(GL_TEXTURE1);
+//        glBindTexture(GL_TEXTURE_2D, tex0);//input-->tex0
+//        glUniform1i(glGetUniformLocation(linear_filter_pro,"image2"),1);
         glDrawArrays(GL_TRIANGLES, 0, 6);
 #endif
         glfwSwapBuffers(gl_window);

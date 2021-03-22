@@ -11,3 +11,6 @@ target_link_libraries(phong ${oglLibs})
 
 add_executable(spec spec.cpp ${thirdcpp})
 target_link_libraries(spec ${oglLibs})
+
+add_executable(material material.cpp ${thirdcpp})
+target_link_libraries(material ${oglLibs})

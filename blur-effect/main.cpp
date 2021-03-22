@@ -134,7 +134,7 @@ int main()
     glUniform2f(glGetUniformLocation(linear_filter_pro, "resolution"),(GLfloat)resx, (GLfloat)resy);
     glUniform1fv(glGetUniformLocation(linear_filter_pro, "weight"), weights.size(), &weights[0]);
     glUniform1fv(glGetUniformLocation(linear_filter_pro, "offset"), offsets.size(), &offsets[0]);
-    glUniform1i(glGetUniformLocation(linear_filter_pro,"filterMode"),0);//default is vertical filter
+
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
@@ -164,7 +164,7 @@ int main()
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, tex0);//input-->tex0
         glUseProgram(linear_filter_pro);
-
+        glUniform1i(glGetUniformLocation(linear_filter_pro,"filterMode"),0);//0 is vertical filter
         glBindVertexArray(cubeVAO);
         glDrawArrays(GL_TRIANGLES, 0, 6);
         //2
