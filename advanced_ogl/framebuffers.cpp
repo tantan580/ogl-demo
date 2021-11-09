@@ -188,19 +188,20 @@ int main()
     // configure global opengl state
     glEnable(GL_DEPTH_TEST);
     ShaderManager shader;
-    shader.buildShader(vs,GL_VERTEX_SHADER);
-    shader.buildShader(fs,GL_FRAGMENT_SHADER);
-    GLuint pro = shader.link();
+    shader.create_shader(vs,GL_VERTEX_SHADER);
+    shader.create_shader(fs,GL_FRAGMENT_SHADER);
+    GLuint pro = shader.create_program();
     ShaderManager screen_shader;
-    screen_shader.buildShader(screen_vs,GL_VERTEX_SHADER);
-    screen_shader.buildShader(screen_fs,GL_FRAGMENT_SHADER);
-    GLuint screen_pro = screen_shader.link();
+    screen_shader.create_shader(screen_vs,GL_VERTEX_SHADER);
+    screen_shader.create_shader(screen_fs,GL_FRAGMENT_SHADER);
+    GLuint screen_pro = screen_shader.create_program();
     // shader configuration
     setData();
     shader.use();
     shader.setInt("texture1",0);
     screen_shader.use();
-    screen_shader.setInt("screenTexture",0);
+    //默认的0号纹理buffer可以不用传
+    //screen_shader.setInt("screenTexture",0);
 
     //framebuffer configuration
     unsigned int framebuffer;

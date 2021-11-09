@@ -9,7 +9,6 @@ GLFWwindow* gl_window = nullptr;
 // Window dimensions
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
-// Camera
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT / 2.0f;
@@ -133,25 +132,5 @@ int createWindow(std::string caption = "ogl-demo")
     }
     return 0;
 }
-
-
-GLuint buildShader(const char * sc,GLenum shaderType){
-    // build and compile our shader program
-    GLuint shader = glCreateShader(shaderType);
-    glShaderSource(shader, 1, &sc, NULL);
-    glCompileShader(shader);
-    // check for shader compile errors
-    int success;
-    char infoLog[512];
-    glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
-    if (!success)
-    {
-        glGetShaderInfoLog(shader, 512, NULL, infoLog);
-        std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
-        return -1;
-    }
-    return shader;
-}
-
 
 #endif

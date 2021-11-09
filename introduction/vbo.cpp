@@ -47,10 +47,10 @@ int main()
     initGlfw();
     createWindow();
 
-    ShaderManager::instance()->buildShader(vs,GL_VERTEX_SHADER);
-    ShaderManager::instance()->buildShader(fs,GL_FRAGMENT_SHADER);
+    ShaderManager::instance()->create_shader(vs,GL_VERTEX_SHADER);
+    ShaderManager::instance()->create_shader(fs,GL_FRAGMENT_SHADER);
     // link shaders
-    int shaderProgram = ShaderManager::instance()->link();
+    int shaderProgram = ShaderManager::instance()->create_program();
 
     setData();
     // render loop

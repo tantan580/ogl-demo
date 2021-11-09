@@ -69,9 +69,9 @@ int main()
     createWindow();
 
     ShaderManager shader;
-    shader.buildShader(vs,GL_VERTEX_SHADER);
-    shader.buildShader(fs,GL_FRAGMENT_SHADER);
-    GLuint pro = shader.link();
+    shader.create_shader(vs,GL_VERTEX_SHADER);
+    shader.create_shader(fs,GL_FRAGMENT_SHADER);
+    GLuint pro = shader.create_program();
     setData();
     //render loop
     while (!glfwWindowShouldClose(gl_window))
@@ -121,6 +121,7 @@ int main()
     }
     glDeleteVertexArrays(1, &cubeVAO);
     glDeleteBuffers(1, &VBO);
+    glDeleteProgram(pro);
     glfwTerminate();
     return 0;
 }

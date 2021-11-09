@@ -87,9 +87,9 @@ int main()
 {
     initGlfw();
     createWindow();
-    GLuint vertexShader = ShaderManager::instance()->buildShader(vs,GL_VERTEX_SHADER);
-    GLuint fragmentShader = ShaderManager::instance()->buildShader(fs,GL_FRAGMENT_SHADER);
-    GLuint  shaderProgram = ShaderManager::instance()->link();
+    GLuint vertexShader = ShaderManager::instance()->create_shader(vs,GL_VERTEX_SHADER);
+    GLuint fragmentShader = ShaderManager::instance()->create_shader(fs,GL_FRAGMENT_SHADER);
+    GLuint  shaderProgram = ShaderManager::instance()->create_program();
 
     setData();
 

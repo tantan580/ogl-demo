@@ -9,7 +9,11 @@
 class ShaderManager{
 public:
     ShaderManager(){}
-     enum Type{
+    ~ShaderManager() {
+
+        glDeleteProgram(shaderProgram);
+    }
+    enum Type{
         Compile,
         Link,
     };
@@ -17,7 +21,7 @@ public:
         static ShaderManager shader;
         return &shader;
     }
-    GLuint buildShader(const char * sc,GLenum shaderType){
+    GLuint create_shader(const char * sc,GLenum shaderType){
         // build and compile our shader program
         GLuint shader = glCreateShader(shaderType);
         glShaderSource(shader, 1, &sc, nullptr);
@@ -32,7 +36,7 @@ public:
         }
         return -1;
     }
-    GLuint link(){
+    GLuint create_program(){
         shaderProgram = glCreateProgram();
         std::cout<<"vs:"<<vertexShader<<std::endl;
         std::cout<<"frags:"<<fragmentShader<<std::endl;
@@ -47,7 +51,7 @@ public:
         }
         return -1;
    }
-   GLuint loadShaderFromFile(const char* filename, GLenum shaderType) {
+    GLuint loadShaderFromFile(const char* filename, GLenum shaderType) {
        std::ifstream file(filename);
        if (!file) {
            std::cerr << "Unable to open file: " << filename << std::endl;
@@ -67,7 +71,7 @@ public:
            std::cerr << "Error reading the file: " << filename << std::endl;
            return 0;
        }
-       return buildShader(source.c_str(),shaderType);
+       return create_shader(source.c_str(),shaderType);
    }
 
     // activate the shader
@@ -138,21 +142,17 @@ private:
      bool checkCompileErrors(GLuint shader, Type type){
         GLint success;
         GLchar infoLog[1024];
-        if(type == Type::Compile)
-        {
+        if(type == Type::Compile){
             glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
-            if(!success)
-            {
+            if(!success){
                 glGetShaderInfoLog(shader, 1024, NULL, infoLog);
                 std::cout << "ERROR::SHADER_COMPILATION_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
                 return false;
             }
         }
-        else
-        {
+        else {
             glGetProgramiv(shader, GL_LINK_STATUS, &success);
-            if(!success)
-            {
+            if(!success) {
                 glGetProgramInfoLog(shader, 1024, NULL, infoLog);
                 std::cout << "ERROR::PROGRAM_LINKING_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
                 return false;

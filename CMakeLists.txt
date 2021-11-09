@@ -1,6 +1,7 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.4)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project(ogldemo)
 SET(CMAKE_BUILD_TYPE Debug)
 
@@ -26,14 +27,16 @@ else(WIN32)
     include_directories(${CMAKE_SOURCE_DIR}/thirdparty/)
     include_directories(${CMAKE_SOURCE_DIR})
     find_package(PkgConfig REQUIRED)
-    find_package (GLUT REQUIRED)
+    #find_package (GLUT REQUIRED)
     pkg_check_modules(DEPS REQUIRED glfw3 gdk-pixbuf-2.0)
-    include_directories(${DEPS_INCLUDE_DIRS} ${GLUT_INCLUDE_DIR})
+    #${GLUT_INCLUDE_DIR}
+    include_directories(${DEPS_INCLUDE_DIRS} )
 
     set(thirdcpp ${CMAKE_SOURCE_DIR}/thirdparty/glad/src/glad.c)
+    set(commoncpp ${CMAKE_SOURCE_DIR}/common/window.cpp)
     set(oglLibs
         ${DEPS_LIBRARIES}
-        ${GLUT_glut_LIBRARY}
+        #${GLUT_glut_LIBRARY}
         -lGL
         #-lm
         -lpthread
@@ -45,6 +48,6 @@ else(WIN32)
     add_subdirectory(advanced_ogl)
     add_subdirectory(introduction)
     add_subdirectory(lighting)
-    add_subdirectory(blur-effect)
-    
+    #add_subdirectory(blur-effect)
+    add_subdirectory(rounded-rect)
 endif()

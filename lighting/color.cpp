@@ -131,13 +131,13 @@ int main()
     createWindow();
 
     ShaderManager color_shader;
-    color_shader.buildShader(color_vs,GL_VERTEX_SHADER);
-    color_shader.buildShader(color_fs,GL_FRAGMENT_SHADER);
-    GLuint color_pro = color_shader.link();
+    color_shader.create_shader(color_vs,GL_VERTEX_SHADER);
+    color_shader.create_shader(color_fs,GL_FRAGMENT_SHADER);
+    GLuint color_pro = color_shader.create_program();
     ShaderManager light_shader;
-    light_shader.buildShader(light_vs,GL_VERTEX_SHADER);
-    light_shader.buildShader(light_fs,GL_FRAGMENT_SHADER);
-    GLuint light_pro = light_shader.link();
+    light_shader.create_shader(light_vs,GL_VERTEX_SHADER);
+    light_shader.create_shader(light_fs,GL_FRAGMENT_SHADER);
+    GLuint light_pro = light_shader.create_program();
 
     setData();
     //render loop

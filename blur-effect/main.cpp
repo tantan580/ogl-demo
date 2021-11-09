@@ -105,15 +105,15 @@ int main()
     createWindow();
     //shader configuration
     ShaderManager shader;
-    shader.buildShader(vs,GL_VERTEX_SHADER);
-    shader.buildShader(fs,GL_FRAGMENT_SHADER);
-    GLuint pro = shader.link();
+    shader.create_shader(vs,GL_VERTEX_SHADER);
+    shader.create_shader(fs,GL_FRAGMENT_SHADER);
+    GLuint pro = shader.create_program();
     std::cout<<"shader"<<std::endl;
 
     ShaderManager shader_linear_filter;
-    shader_linear_filter.buildShader(vs,GL_VERTEX_SHADER);
-    shader_linear_filter.buildShader(linear_filter_fs,GL_FRAGMENT_SHADER);
-    GLuint linear_filter_pro = shader_linear_filter.link();
+    shader_linear_filter.create_shader(vs,GL_VERTEX_SHADER);
+    shader_linear_filter.create_shader(linear_filter_fs,GL_FRAGMENT_SHADER);
+    GLuint linear_filter_pro = shader_linear_filter.create_program();
     std::cout<<"shader_linear_filter"<<std::endl;
     //set data
     setData();

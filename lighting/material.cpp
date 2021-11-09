@@ -179,13 +179,13 @@ int main()
     glEnable(GL_DEPTH_TEST);
 
     ShaderManager lighting_shader;
-    lighting_shader.buildShader(lighting_vs,GL_VERTEX_SHADER);
-    lighting_shader.buildShader(lighting_fs,GL_FRAGMENT_SHADER);
-    GLuint lighting_pro = lighting_shader.link();
+    lighting_shader.create_shader(lighting_vs,GL_VERTEX_SHADER);
+    lighting_shader.create_shader(lighting_fs,GL_FRAGMENT_SHADER);
+    GLuint lighting_pro = lighting_shader.create_program();
     ShaderManager lamp_shader;
-    lamp_shader.buildShader(lamp_vs,GL_VERTEX_SHADER);
-    lamp_shader.buildShader(lamp_fs,GL_FRAGMENT_SHADER);
-    GLuint lamp_pro = lamp_shader.link();
+    lamp_shader.create_shader(lamp_vs,GL_VERTEX_SHADER);
+    lamp_shader.create_shader(lamp_fs,GL_FRAGMENT_SHADER);
+    GLuint lamp_pro = lamp_shader.create_program();
 
     setData();
     //render loop
