@@ -78,69 +78,67 @@ unsigned int cubeTexture,floorTexture;
 void setData()
 {
     float cubeVertices[] = {
-            // positions          // texture Coords
-            -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-             0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
-             0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-             0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-            -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-            -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+        // positions          // texture Coords
+        -0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
+        0.5f, -0.5f, -0.5f, 1.0f, 0.0f,
+        0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
+        0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
+        -0.5f, 0.5f, -0.5f, 0.0f, 1.0f,
+        -0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
 
-            -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-             0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-             0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-             0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-            -0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
-            -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+        -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
+        0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
+        0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
+        0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
+        -0.5f, 0.5f, 0.5f, 0.0f, 1.0f,
+        -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
 
-            -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-            -0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-            -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-            -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-            -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-            -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+        -0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
+        -0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
+        -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+        -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+        -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
+        -0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
 
-             0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-             0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-             0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-             0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-             0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-             0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+        0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
+        0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
+        0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+        0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+        0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
+        0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
 
-            -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-             0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
-             0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-             0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-            -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-            -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+        -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+        0.5f, -0.5f, -0.5f, 1.0f, 1.0f,
+        0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
+        0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
+        -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
+        -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
 
-            -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-             0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-             0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-             0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-            -0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
-            -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
-        };
-        float planeVertices[] = {
-            // positions          // texture Coords
-             5.0f, -0.5f,  5.0f,  2.0f, 0.0f,
-            -5.0f, -0.5f,  5.0f,  0.0f, 0.0f,
-            -5.0f, -0.5f, -5.0f,  0.0f, 2.0f,
+        -0.5f, 0.5f, -0.5f, 0.0f, 1.0f,
+        0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
+        0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
+        0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
+        -0.5f, 0.5f, 0.5f, 0.0f, 0.0f,
+        -0.5f, 0.5f, -0.5f, 0.0f, 1.0f};
+    float planeVertices[] = {
+        // positions          // texture Coords
+        5.0f, -0.5f, 5.0f, 2.0f, 0.0f,
+        -5.0f, -0.5f, 5.0f, 0.0f, 0.0f,
+        -5.0f, -0.5f, -5.0f, 0.0f, 2.0f,
 
-             5.0f, -0.5f,  5.0f,  2.0f, 0.0f,
-            -5.0f, -0.5f, -5.0f,  0.0f, 2.0f,
-             5.0f, -0.5f, -5.0f,  2.0f, 2.0f
-        };
-        float quadVertices[] = { // vertex attributes for a quad that fills the entire screen in Normalized Device Coordinates.
-            // positions   // texCoords
-            -1.0f,  1.0f,  0.0f, 1.0f,
-            -1.0f, -1.0f,  0.0f, 0.0f,
-             1.0f, -1.0f,  1.0f, 0.0f,
+        5.0f, -0.5f, 5.0f, 2.0f, 0.0f,
+        -5.0f, -0.5f, -5.0f, 0.0f, 2.0f,
+        5.0f, -0.5f, -5.0f, 2.0f, 2.0f};
+    float quadVertices[] = {// vertex attributes for a quad that fills the entire screen in Normalized Device Coordinates.
+                            // positions   // texCoords
+                            -1.0f, 1.0f, 0.0f, 1.0f,
+                            -1.0f, -1.0f, 0.0f, 0.0f,
+                            1.0f, -1.0f, 1.0f, 0.0f,
 
-            -1.0f,  1.0f,  0.0f, 1.0f,
-             1.0f, -1.0f,  1.0f, 0.0f,
-             1.0f,  1.0f,  1.0f, 1.0f
-        };
+                            -1.0f, 1.0f, 0.0f, 1.0f,
+                            1.0f, -1.0f, 1.0f, 0.0f,
+                            1.0f, 1.0f, 1.0f, 1.0f};
+
     glGenVertexArrays(1,&cubeVAO);
     glGenBuffers(1,&cubeVBO);
     glBindVertexArray(cubeVAO);
@@ -175,8 +173,9 @@ void setData()
     //load textures
     std::cout<<FileSystem::getPath(rs.walljpg.c_str())<<std::endl;
 
-    createTexture(FileSystem::getPath(rs.walljpg.c_str()),cubeTexture);
-    createTexture(FileSystem::getPath(rs.duckjpg.c_str()),floorTexture);
+    Texture texture;
+    texture.createTexture2D(FileSystem::getPath(rs.walljpg.c_str()),cubeTexture);
+    texture.createTexture2D(FileSystem::getPath(rs.duckjpg.c_str()),floorTexture);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
@@ -197,25 +196,30 @@ int main()
     GLuint screen_pro = screen_shader.create_program();
     // shader configuration
     setData();
+
     shader.use();
     shader.setInt("texture1",0);
-    screen_shader.use();
-    //默认的0号纹理buffer可以不用传
-    //screen_shader.setInt("screenTexture",0);
 
-    //framebuffer configuration
+    screen_shader.use();
+    // 默认的0号纹理buffer可以不用传
+    screen_shader.setInt("screenTexture",0);
+
+    // framebuffer configuration
     unsigned int framebuffer;
     glGenFramebuffers(1, &framebuffer);
     glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
-    //create a color attachment texture
+    // create a color attachment texture
+    // 当把一个纹理附加到帧缓冲上的时候，所有渲染命令会写入到纹理上
     unsigned int textureColorbuffer;
     glGenTextures(1,&textureColorbuffer);
     glBindTexture(GL_TEXTURE_2D, textureColorbuffer);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, SCR_WIDTH, SCR_HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    // attach texture to fbo
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureColorbuffer, 0);
     // create a renderbuffer object for depth and stencil attachment (we won't be sampling these)
+    // this rbo is not use
     unsigned int rbo;
     glGenRenderbuffers(1, &rbo);
     glBindRenderbuffer(GL_RENDERBUFFER, rbo);
@@ -241,7 +245,7 @@ int main()
         glEnable(GL_DEPTH_TEST); // enable depth testing (is disabled for rendering screen-space quad)
 
         // make sure we clear the framebuffer's content
-        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         shader.use();
         glm::mat4 model = glm::mat4(1.0f);
@@ -249,7 +253,7 @@ int main()
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
         shader.setMat4("view", view);
         shader.setMat4("projection", projection);
-        // cube
+        // cube , draw cubeTexture to textureColorbuffer
         glBindVertexArray(cubeVAO);
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, cubeTexture);
@@ -272,7 +276,7 @@ int main()
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
         glDisable(GL_DEPTH_TEST); // disable depth test so screen-space quad isn't discarded due to depth test.
         // clear all relevant buffers
-        glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // set clear color to white (not really necessery actually, since we won't be able to see behind the quad anyways)
+        glClearColor(1.0f, 1.0f, 0.0f, 1.0f); // set clear color to white (not really necessery actually, since we won't be able to see behind the quad anyways)
         glClear(GL_COLOR_BUFFER_BIT);
 
         screen_shader.use();

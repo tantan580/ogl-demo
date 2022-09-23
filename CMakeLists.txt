@@ -6,22 +6,29 @@ project(ogldemo)
 SET(CMAKE_BUILD_TYPE Debug)
 
 if(WIN32)
-    MESSAGE(STATUS “This is windows.”)
-    #include_directories($(PROJECT_SOURCE_DIR)/3rdparty/glad/include)
-    #include_directories($(PROJECT_SOURCE_DIR)/3rdparty/stb-master)
-    #include_directories($(PROJECT_SOURCE_DIR)/3rdparty/glfw-master/include)
-    include_directories("G:\\OpenGL\\demo\\3rdparty\\glad\\include\\")
-    include_directories("G:\\OpenGL\\demo\\3rdparty\\stb-master\\")
-    include_directories("G:\\OpenGL\\demo\\3rdparty\\glfw-master\\include\\")
-    include_directories("G:\\OpenGL\\demo\\3rdparty\\glm-master")
-    link_directories("G:\\OpenGL\\demo\\3rdparty\\glfw-master\\build\\src")
+    MESSAGE(STATUS “This is windows platform......”)
+    set(CMAKE_FIND_LIBRARY_SUFFIXES ".a")
 
-    #link_directories($(PROJECT_SOURCE_DIR)/3rdpartyglfw-master/build/src)
+    include_directories(${PROJECT_SOURCE_DIR}/thirdparty/glad/include)
+    include_directories(${PROJECT_SOURCE_DIR}/thirdparty/stb)
+    include_directories(${PROJECT_SOURCE_DIR}/thirdparty/glfw/include)
+    include_directories(${PROJECT_SOURCE_DIR}/thirdparty/glm)
+    include_directories(${PROJECT_SOURCE_DIR}/)
+    configure_file(./common/root_directory.h.in configuration/root_directory.h)
+    include_directories(${CMAKE_BINARY_DIR}/configuration)
 
-    file(GLOB project_file introduction/01_4.cpp common.h shader.h texture.h glad.c)
-    add_executable(${PROJECT_NAME} ${project_file})
-    add_executable(blur blur-effect/)
-    target_link_libraries(${PROJECT_NAME} glfw3 opengl32)
+    link_directories(${PROJECT_SOURCE_DIR}/thirdparty/glfw/build/src)
+
+    set(oglLibs ${PROJECT_SOURCE_DIR}/thirdparty/glfw/build/src/libglfw3.a)
+    set(thirdcpp ${CMAKE_SOURCE_DIR}/thirdparty/glad/src/glad.c )
+
+    file(GLOB commoncpps ${CMAKE_SOURCE_DIR}/common/*.cpp)
+    message(${commoncpps})
+    
+    add_subdirectory(advanced_ogl)
+    add_subdirectory(introduction)
+    add_subdirectory(lighting)
+    
 else(WIN32)
     include_directories(${CMAKE_SOURCE_DIR}/thirdparty/glad/include)
     include_directories(${CMAKE_SOURCE_DIR}/thirdparty/)
@@ -33,11 +40,13 @@ else(WIN32)
     include_directories(${DEPS_INCLUDE_DIRS} )
 
     set(thirdcpp ${CMAKE_SOURCE_DIR}/thirdparty/glad/src/glad.c)
-    set(commoncpp ${CMAKE_SOURCE_DIR}/common/window.cpp)
+    file(GLOB commoncpps ${CMAKE_SOURCE_DIR}/common/*.cpp)
+    
     set(oglLibs
         ${DEPS_LIBRARIES}
         #${GLUT_glut_LIBRARY}
         -lGL
+        -lX11
         #-lm
         -lpthread
         -ldl

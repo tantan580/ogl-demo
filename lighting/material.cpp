@@ -8,6 +8,7 @@
 #include "common/shader.h"
 #include "common/texture.h"
 #include "common/camera.h"
+#include "common/window.h"
 
 #include <iostream>
 
@@ -172,8 +173,8 @@ void setData()
 
 int main()
 {
-    initGlfw();
-    createWindow();
+    OGLWindow window;
+    GLFWwindow *gl_window = window.createWindow(800, 600, "material");
     // configure global opengl state
     // -----------------------------
     glEnable(GL_DEPTH_TEST);

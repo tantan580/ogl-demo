@@ -33,3 +33,7 @@ blur-effect base on [idea](http://rastergrid.com/blog/2010/09/efficient-gaussian
 
 9.eglMakeCurrent
 
+# windows platform build
+windows 下需要安装mingw .
+cmake -G "MinGW Makefiles" ..
+mingw32-make.exe

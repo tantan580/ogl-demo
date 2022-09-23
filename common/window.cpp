@@ -1,10 +1,15 @@
 #include "common/window.h"
-
+#include "common/camera.h"
+extern Camera camera;
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
     std::cout<<"framebuffer_size_callback"<<std::endl;
     glViewport(0, 0, width, height);
+}
+
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset){
+    camera.ProcessMouseScroll(yoffset);
 }
 
 OGLWindow::OGLWindow()
@@ -27,7 +32,7 @@ GLFWwindow* OGLWindow::createWindow(int w, int h, std::string caption)
     glfwMakeContextCurrent(gl_window);
     glfwSetFramebufferSizeCallback(gl_window, framebuffer_size_callback);
     //glfwSetCursorPosCallback(gl_window, mouse_callback);
-    //glfwSetScrollCallback(gl_window, scroll_callback);
+   glfwSetScrollCallback(gl_window, scroll_callback);
 
     // tell GLFW to capture our mouse
     //glfwSetInputMode(gl_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
@@ -59,14 +64,25 @@ void OGLWindow::render(const std::function<void()>& f)
     }   
 }
 
-void OGLWindow::init()
+void OGLWindow::init(bool opengl)
 {
     // glfw: initialize and configure
     // ------------------------------
     glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    if (opengl == true)
+    {
+        // glfw: initialize and configure
+        // ------------------------------
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+
+        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    }
+    else
+    {
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+    }
 
 #ifdef __APPLE__
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);

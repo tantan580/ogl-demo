@@ -17,7 +17,7 @@ public:
     void setBackColor(float r, float g, float b, float a);
     void render(const std::function<void()>& f);
 private:
-    void init();
+    void init(bool opengl = true);
 private:
     GLFWwindow *gl_window {0};
     glm::vec4 gl_backColor;

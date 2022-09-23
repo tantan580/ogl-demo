@@ -37,10 +37,10 @@ void processInput(GLFWwindow *window)
         camera.ProcessKeyboard(RIGHT, timing::deltaTime);
 }
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-    glViewport(0, 0, width, height);
-}
+// void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+// {
+//     glViewport(0, 0, width, height);
+// }
 
 // Is called whenever a key is pressed/released via GLFW
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
@@ -87,18 +87,27 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos){
 }
 
 
-void scroll_callback(GLFWwindow* window, double xoffset, double yoffset){
-    camera.ProcessMouseScroll(yoffset);
-}
+// void scroll_callback(GLFWwindow* window, double xoffset, double yoffset){
+//     camera.ProcessMouseScroll(yoffset);
+// }
 
-void initGlfw()
+void initGlfw(bool opengl = true)
 {
-    // glfw: initialize and configure
-    // ------------------------------
     glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    if (opengl == true)
+    {
+        // glfw: initialize and configure
+        // ------------------------------
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+
+        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    }
+    else
+    {
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+    }
 
 #ifdef __APPLE__
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
@@ -117,12 +126,12 @@ int createWindow(std::string caption = "ogl-demo")
         return -1;
     }
     glfwMakeContextCurrent(gl_window);
-    glfwSetFramebufferSizeCallback(gl_window, framebuffer_size_callback);
+    //glfwSetFramebufferSizeCallback(gl_window, framebuffer_size_callback);
     //glfwSetCursorPosCallback(gl_window, mouse_callback);
     //glfwSetScrollCallback(gl_window, scroll_callback);
 
     // tell GLFW to capture our mouse
-    //glfwSetInputMode(gl_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+   // glfwSetInputMode(gl_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     // glad: load all OpenGL function pointers
     // ---------------------------------------
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))

@@ -2,6 +2,7 @@
 #include "common/common.h"
 #include "common/shader.h"
 #include "common/texture.h"
+#include "common/filesystem.h"
 
 unsigned int VBO;
 unsigned int VAO;
@@ -79,8 +80,11 @@ void setData()
     glEnableVertexAttribArray(2);
     //load and create a texture
 
-    createTexture("./wall.jpg",tex1);
-    createTexture("./duck.jpg",tex2);
+    const std::string wall = "resources/wall.jpg";
+    const std::string duck = "resources/duck.jpg";
+    Texture texture;
+    texture.createTexture2D(FileSystem::getPath(wall.c_str()), tex1);
+    texture.createTexture2D(FileSystem::getPath(duck.c_str()), tex2);
 }
 
 int main()

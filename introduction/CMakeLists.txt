@@ -9,8 +9,7 @@ target_link_libraries(vao ${oglLibs})
 add_executable(vao2 ${thirdcpp} vao2.cpp)
 target_link_libraries(vao2 ${oglLibs})
 
-
-add_executable(textures ${thirdcpp} textures.cpp)
+add_executable(textures ${thirdcpp}  ${commoncpps} textures.cpp)
 target_link_libraries(textures ${oglLibs})
 
 add_executable(triangle ${thirdcpp} triangle.cpp)
