@@ -1,3 +1,4 @@
+#include "common/common.h"
 #include "common/window.h"
 #include "common/shader.h"
 #include "common/camera.h"
@@ -10,7 +11,6 @@
 unsigned int VBO, cubeVAO;
 static glm::vec3 eye(0.0f, 0.5f, 4.f);
 
-static Camera camera(eye);
 int w = 800; int h = 600;  
 static ShaderManager shader;
 
@@ -60,9 +60,8 @@ void renderCallback() {
 int main()
 {
     //1、create window
-    std::string caption("rounded-rect");
-    OGLWindow window;
-    GLFWwindow *gl_window = window.createWindow(w, h, caption);
+    OGLWindow window(true);
+    GLFWwindow *gl_window = window.createWindow(800, 600, "rounded-rect");
     //2、编译shader
     const std::string vs = "rounded-rect/circle-cut.vert";
     const std::string fs = "rounded-rect/circle-cut.frag";

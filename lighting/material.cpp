@@ -173,7 +173,7 @@ void setData()
 
 int main()
 {
-    OGLWindow window;
+    OGLWindow window(true);
     GLFWwindow *gl_window = window.createWindow(800, 600, "material");
     // configure global opengl state
     // -----------------------------

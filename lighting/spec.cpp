@@ -84,7 +84,7 @@ glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 
 int main()
 {
-    OGLWindow window;
+    OGLWindow window(true);
     GLFWwindow *gl_window = window.createWindow(800, 600, "spec");
 
     // configure global opengl state

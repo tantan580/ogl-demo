@@ -12,7 +12,7 @@
 class OGLWindow
 {
 public:
-    OGLWindow();
+    OGLWindow(bool opengl = true);
     GLFWwindow* createWindow(int w, int h, std::string caption);
     void setBackColor(float r, float g, float b, float a);
     void render(const std::function<void()>& f);

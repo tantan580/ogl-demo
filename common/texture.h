@@ -7,6 +7,7 @@
 #include <glib.h>
 #endif
 #include <GLFW/glfw3.h>
+#include <gli/gli.hpp>
 #include <iostream>
 #include <vector>
 
@@ -23,6 +24,7 @@ public:
     unsigned char *data{0};
     int width;
     int height;
+    int depth;
     int channels;
 };
 
@@ -33,6 +35,7 @@ public:
     ~Texture();
     void createTexture2D(std::string filename, unsigned int &tex);
     void createCubeMapTexture(std::vector<std::string> faces, unsigned int &tex);
+    void createCompressedTexture3D(std::string filename, unsigned int &tex);
     void createFramebufferTexture(GLuint &fbo, GLuint &fbtex);
 };
 

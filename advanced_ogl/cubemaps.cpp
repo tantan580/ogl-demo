@@ -208,7 +208,7 @@ void setData()
 
 int main()
 {
-    OGLWindow window;
+    OGLWindow window(true);
     GLFWwindow *gl_window = window.createWindow(800, 600, "cube-map");
     
     setData();

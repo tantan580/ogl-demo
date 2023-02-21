@@ -10,3 +10,7 @@
 	path = thirdparty/stb
 	url = https://github.com/nothings/stb.git
 	branch = master
+[submodule "thirdparty/gli"]
+	path = thirdparty/gli
+	url = https://github.com/g-truc/gli.git
+	branch = master

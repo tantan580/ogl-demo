@@ -12,10 +12,10 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset){
     camera.ProcessMouseScroll(yoffset);
 }
 
-OGLWindow::OGLWindow()
+OGLWindow::OGLWindow(bool opengl)
 {
     std::cout<<"OGLWindow"<<std::endl;
-    init();
+    init(opengl);
 }
 
 GLFWwindow* OGLWindow::createWindow(int w, int h, std::string caption)
@@ -32,7 +32,7 @@ GLFWwindow* OGLWindow::createWindow(int w, int h, std::string caption)
     glfwMakeContextCurrent(gl_window);
     glfwSetFramebufferSizeCallback(gl_window, framebuffer_size_callback);
     //glfwSetCursorPosCallback(gl_window, mouse_callback);
-   glfwSetScrollCallback(gl_window, scroll_callback);
+    glfwSetScrollCallback(gl_window, scroll_callback);
 
     // tell GLFW to capture our mouse
     //glfwSetInputMode(gl_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
@@ -82,6 +82,7 @@ void OGLWindow::init(bool opengl)
     {
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+        glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_ES_API);
     }
 
 #ifdef __APPLE__

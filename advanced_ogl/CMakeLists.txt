@@ -9,5 +9,8 @@ target_link_libraries(stencil ${oglLibs})
 add_executable(cubemaps ${thirdcpp} cubemaps.cpp ${commoncpps})
 target_link_libraries(cubemaps ${oglLibs})
 
+add_executable(bcn3d ${thirdcpp} bcn3d.cpp ${commoncpps})
+target_link_libraries(bcn3d ${oglLibs})
+
 # add_executable(cube_map_array cube_map_array.cpp ${thirdcpp})
 # target_link_libraries(cube_map_array ${oglLibs})
